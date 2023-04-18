@@ -29,6 +29,9 @@ class crawler:
 			elif url.startswith("mailto:") or url.startswith("javascript:"):
 				continue
 			
+			elif url.startswith("tel:"):
+				continue
+				
 			elif urljoin(base,url) in self.visited:
 				continue
 				

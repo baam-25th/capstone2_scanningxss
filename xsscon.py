@@ -14,20 +14,13 @@ Github: https://www.github.com/menkrep1337/XSSCon
 Version: 0.5 Final
 """
 def check(getopt):
-	payload=int(getopt.payload_level)
-	if payload > 6 and getopt.payload is None:
-		Log.info("Do you want use custom payload (Y/n)?")
-		answer=input("> "+W)
-		if answer.lower().strip() == "y":
-			Log.info("Write the XSS payload below")
-			payload=input("> "+W)
-		else:
-			payload=core.generate(randint(1,6))
+	payloads = []
+	with open('payloads.txt', 'r') as f:
+		for line in f:
+			payloads.append(line.strip())
+		
+	return payloads
 	
-	else:
-		payload=core.generate(payload)
-			
-	return payload if getopt.payload is None else getopt.payload
 	
 def start():
 	parse=argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,usage="XSSCon -u <target> [options]",epilog=epilog,add_help=False)
@@ -52,10 +45,12 @@ def start():
 		core.main(getopt.u,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
 		
 		crawler.crawl(getopt.u,int(getopt.depth),getopt.proxy,getopt.user_agent,check(getopt),getopt.method,getopt.cookie)
-		
+		with open('xsscon_results.txt','a') as f:
+			f.write(">"*20)
 	elif getopt.single:
 		core.main(getopt.single,getopt.proxy,getopt.user_agent,check(getopt),getopt.cookie,getopt.method)
-		
+		with open('xsscon_results.txt','a') as f:
+			f.write(">"*20)
 	elif getopt.about:
 		print("""
 ***************

