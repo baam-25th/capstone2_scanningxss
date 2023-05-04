@@ -38,13 +38,20 @@ class crawler:
 			else:
 				lst.append(urljoin(base,url))
 				self.visited.append(urljoin(base,url))
-			
+		
 		return lst
-
+	
+	
+	
 	@classmethod
 	def crawl(self,base,depth,proxy,headers,level,method,cookie):
 
 		urls=self.getLinks(base,proxy,headers,cookie)
+		
+		with open('url.txt', 'a') as f:
+			for item in urls:
+				f.write("%s\n" % item)
+			
 		
 		for url in urls:
 			
